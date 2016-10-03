@@ -18,7 +18,7 @@ echo "Running JSON Lint"
 find nubis/ -path nubis/travis -prune -o -name '*.json' -print0 | xargs -r0 bundle exec jsonlint || ERRORS=$(( ERRORS + 1 ))
 
 echo "Running MarkDown Lint (passive)"
-find -path nubis/travis -prune -o -path nubis/librarian-puppet -prune -o -path nubis/.tmp -prune -o -path CHANGELOG.md -prune -o -type f -name '*.md' -print0 |  xargs -r0 bundle exec mdl || true
+find . -not \( \( -path ./nubis/librarian-puppet -o -path ./nubis/.tmp \)  -prune \) -name \*.md  | grep -v ./CHANGELOG.md | xargs -r bundle exec mdl || true
 
 if [ -f "nubis/Puppetfile" ]; then
   echo "Installing specified puppet modules"
