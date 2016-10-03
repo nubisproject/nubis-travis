@@ -9,16 +9,16 @@ fi
 ERRORS=0
 
 echo "Running Puppet Lint"
-bundle exec puppet-lint --no-puppet_url_without_modules-check --no-80chars-check --no-140chars-check --fail-on-warnings nubis/puppet/*pp || ERRORS=$(( $ERRORS + 1 ))
+bundle exec puppet-lint --no-puppet_url_without_modules-check --no-80chars-check --no-140chars-check --fail-on-warnings nubis/puppet/*pp || ERRORS=$(( ERRORS + 1 ))
 
 echo "Running ShellCheck"
-find nubis -path nubis/travis/vendor -prune -o -path nubis/librarian-puppet -prune -o -path nubis/.tmp -prune -o -type f -a \! -name '*.tmpl' -print0 | xargs -0 file | grep 'shell script' | cut -d: -f1 | xargs -r shellcheck || ERRORS=$(( $ERRORS + 1 ))
+find nubis -path nubis/travis/vendor -prune -o -path nubis/librarian-puppet -prune -o -path nubis/.tmp -prune -o -type f -a \! -name '*.tmpl' -print0 | xargs -0 file | grep 'shell script' | cut -d: -f1 | xargs -r shellcheck || ERRORS=$(( ERRORS + 1 ))
 
 echo "Running JSON Lint"
-find nubis/ -path nubis/travis/vendor -prune -o -name '*.json' -print0 | xargs -r0 bundle exec jsonlint || ERRORS=$(( $ERRORS + 1 ))
+find nubis/ -path nubis/travis/vendor -prune -o -name '*.json' -print0 | xargs -r0 bundle exec jsonlint || ERRORS=$(( ERRORS + 1 ))
 
 echo "Running MarkDown Lint (passive)"
-find nubis -path nubis/travis/vendor -prune -o -path nubis/librarian-puppet -prune -o -path nubis/.tmp -prune -o -type f -name '*.md' -print0 |  xargs -r0 mdl || true
+find -path nubis/travis/vendor -prune -o -path nubis/librarian-puppet -prune -o -path nubis/.tmp -prune -o -type f -name '*.md' -print0 |  xargs -r0 mdl || true
 
 if [ -f "nubis/Puppetfile" ]; then
   echo "Installing specified puppet modules"
