@@ -18,7 +18,7 @@ echo "Running ShellCheck"
 find -path "./.git*" -prune -o -path ./nubis/travis -prune -o -path ./nubis/librarian-puppet -prune -o -path ./nubis/.tmp -prune -o -type f -a \! -name '*.tmpl' -print0 | xargs -0 file | grep 'shell script' | cut -d: -f1 | xargs -r shellcheck || ERRORS=$(( ERRORS + 1 ))
 
 echo "Running JSON Lint"
-find -path ./nubis/travis -prune -o -name '*.json*' -print0 | xargs -r0 bundle exec jsonlint || ERRORS=$(( ERRORS + 1 ))
+find  -not \( \( -path ./nubis/librarian-puppet -o -path ./nubis/.tmp -o -path ./nubis/travis \)  -prune \) -type f -name '*.json*' -print0 | xargs -r0 bundle exec jsonlint || ERRORS=$(( ERRORS + 1 ))
 
 echo "Running MarkDown Lint (passive)"
 find  -not \( \( -path ./nubis/librarian-puppet -o -path ./nubis/.tmp -o -path ./nubis/travis \)  -prune \) -type f -name \*.md  | grep -v ./CHANGELOG.md | xargs -r bundle exec mdl || true
