@@ -16,7 +16,7 @@ if [ "$BUNDLE_GEMFILE" == "" ]; then
   bundle install --jobs=3 --retry=3 --path="${BUNDLE_PATH:-vendor/bundle}"
 fi
 
-export PATH=$PATH:$HOME/.local/bin:$HOME/nubis-builder/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin/nubis-builder/bin
 
 if [ "$(aws --version 2>&1 | perl -ne'print $1 if m{aws-cli\/([0-9.]+)}')" != "$AWSCLI_VERSION" ]; then
   pip install --user awscli==$AWSCLI_VERSION
@@ -27,17 +27,18 @@ if [ "$(packer --version 2>/dev/null)" != "$PACKER_VERSION" ]; then
   cd "$HOME/bin" && unzip /tmp/packer.zip
 fi
 
-if [ ! -d "$HOME/nubis-builder" ]; then
-  git clone https://github.com/nubisproject/nubis-builder.git "$HOME/nubis-builder"
+if [ ! -d "$HOME/bin/nubis-builder/.git" ]; then
+  rm -rfv "$HOME/bin/nubis-builder"
+  git clone https://github.com/nubisproject/nubis-builder.git "$HOME/bin/nubis-builder"
 fi
 
-if [ "$(git -C "$HOME/nubis-builder" describe)" != "$NUBIS_BUILDER_VERSION" ]; then
-  git -C "$HOME/nubis-builder" pull master
-  git -C "$HOME/nubis-builder" fetch --tags
-  git -C "$HOME/nubis-builder" checkout "$NUBIS_BUILDER_VERSION"
+if [ "$(git -C "$HOME/bin/nubis-builder" describe)" != "$NUBIS_BUILDER_VERSION" ]; then
+  git -C "$HOME/bin/nubis-builder" pull origin master
+  git -C "$HOME/bin/nubis-builder" fetch --tags
+  git -C "$HOME/bin/nubis-builder" checkout "$NUBIS_BUILDER_VERSION"
 fi
 
-cat <<EOF > "$HOME/nubis-builder/secrets/variables.json"
+cat <<EOF > "$HOME/bin/nubis-builder/secrets/variables.json"
 {
   "variables": {
     "aws_region": "${AWS_REGION:-us-west-2}",
