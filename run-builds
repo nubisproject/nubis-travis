@@ -47,7 +47,7 @@ cat <<EOF > "$HOME/nubis-builder/secrets/variables.json"
 EOF
 
 aws --version
-packer --version
+packer version
 nubis-builder --version
 
 #Kick the build
