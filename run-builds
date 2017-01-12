@@ -29,7 +29,7 @@ fi
 
 if [ "$(packer --version 2>/dev/null)" != "$PACKER_VERSION" ]; then
   wget -O /tmp/packer.zip "https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_amd64.zip"
-  cd "$HOME/bin" && unzip /tmp/packer.zip
+  ( cd "$HOME/bin" && unzip /tmp/packer.zip )
 fi
 
 if [ ! -d "$HOME/bin/nubis-builder/.git" ]; then
@@ -57,6 +57,6 @@ packer version
 nubis-builder --version
 
 #Kick the build
-bundle exec nubis-builder build
+travis_wait 60 bundle exec nubis-builder build
 
 exit 0
