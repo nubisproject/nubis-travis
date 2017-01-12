@@ -57,6 +57,7 @@ packer version
 nubis-builder --version
 
 #Kick the build
-travis_wait 60 bundle exec nubis-builder build
+declare -F
+bundle exec nubis-builder build
 
 exit 0
