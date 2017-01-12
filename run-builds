@@ -56,7 +56,25 @@ aws --version
 packer version
 nubis-builder --version
 
+
 #Kick the build
-bundle exec nubis-builder build
+bundle exec nubis-builder build &
+
+minutes=0
+limit=60
+
+# Generate invisible output every minute to keep Travis from killing up
+while kill -0 $! >/dev/null 2>&1; do
+  echo -n -e " \b" # never leave evidences!
+
+  if [ $minutes == $limit ]; then
+    break;
+  fi
+
+  minutes=$((minutes+1))
+
+  sleep 60
+done
+
 
 exit 0
