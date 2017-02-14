@@ -1,9 +1,8 @@
 #!/bin/bash
 set -e
 
-PACKER_VERSION="0.12.1"
-NUBIS_BUILDER_VERSION="v1.3.0"
-AWSCLI_VERSION="1.11.36"
+PACKER_VERSION="0.12.2"
+NUBIS_BUILDER_VERSION="v1.3.1"
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "AMI building not supported (yet) on Pull-Requests"
@@ -22,10 +21,6 @@ if [ "$BUNDLE_GEMFILE" == "" ]; then
 fi
 
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin/nubis-builder/bin
-
-if [ "$(aws --version 2>&1 | perl -ne'print $1 if m{aws-cli\/([0-9.]+)}')" != "$AWSCLI_VERSION" ]; then
-  pip install --user awscli==$AWSCLI_VERSION
-fi
 
 if [ "$(packer --version 2>/dev/null)" != "$PACKER_VERSION" ]; then
   wget -O /tmp/packer.zip "https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_amd64.zip"
@@ -58,7 +53,7 @@ nubis-builder --version
 
 
 #Kick the build
-bundle exec nubis-builder build &
+bundle exec nubis-builder build --instance-type c3.large --spot &
 
 minutes=0
 limit=60
