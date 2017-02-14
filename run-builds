@@ -47,7 +47,6 @@ cat <<EOF > "$HOME/bin/nubis-builder/secrets/variables.json"
 }
 EOF
 
-aws --version
 packer version
 nubis-builder --version
 
