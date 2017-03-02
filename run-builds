@@ -11,7 +11,7 @@ fi
 
 if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   echo "Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY"
-  exit 1
+  exit 0
 fi
 
 if [ "$BUNDLE_GEMFILE" == "" ]; then
