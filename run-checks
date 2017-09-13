@@ -20,8 +20,8 @@ find -path "./.git*" -prune -o -path ./nubis/travis -prune -o -path ./nubis/libr
 echo "Running JSON Lint"
 find  -not \( \( -path ./nubis/librarian-puppet -o -path ./nubis/.tmp -o -path ./nubis/travis \)  -prune \) -type f -name '*.json*' -print0 | xargs -r0 bundle exec jsonlint || ERRORS=$(( ERRORS + 1 ))
 
-echo "Running MarkDown Lint (passive)"
-find  -not \( \( -path ./nubis/librarian-puppet -o -path ./nubis/.tmp -o -path ./nubis/travis \)  -prune \) -type f -name \*.md  | grep -v ./CHANGELOG.md | xargs -r bundle exec mdl || true
+echo "Running MarkDown Lint"
+find  -not \( \( -path ./nubis/librarian-puppet -o -path ./nubis/.tmp -o -path ./nubis/travis \)  -prune \) -type f -name \*.md  | grep -v ./CHANGELOG.md | xargs -r bundle exec mdl
 
 if [ -f "nubis/Puppetfile" ]; then
   echo "Installing specified puppet modules"
