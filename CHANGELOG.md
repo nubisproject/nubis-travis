@@ -5,11 +5,14 @@
 
 **Closed issues:**
 
+- Tag v1.4.1 release [\#20](https://github.com/nubisproject/nubis-travis/issues/20)
 - Tag v1.4.1 release [\#17](https://github.com/nubisproject/nubis-travis/issues/17)
 - Tag v1.4.1 release [\#9](https://github.com/nubisproject/nubis-travis/issues/9)
 
 **Merged pull requests:**
 
+- Merge v1.4.1 release into develop. \[skip ci\] [\#22](https://github.com/nubisproject/nubis-travis/pull/22) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.1 release \[skip ci\] [\#21](https://github.com/nubisproject/nubis-travis/pull/21) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.4.1 release into develop. \[skip ci\] [\#19](https://github.com/nubisproject/nubis-travis/pull/19) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.4.1 release \[skip ci\] [\#18](https://github.com/nubisproject/nubis-travis/pull/18) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.4.1 release into develop. \[skip ci\] [\#16](https://github.com/nubisproject/nubis-travis/pull/16) ([tinnightcap](https://github.com/tinnightcap))
