@@ -1,16 +1,26 @@
 # Change Log
 
 ## [v1.4.1](https://github.com/nubisproject/nubis-travis/tree/v1.4.1) (2017-09-21)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.1...v1.4.1)
+
+**Merged pull requests:**
+
+- Fix paths for Docker [\#26](https://github.com/nubisproject/nubis-travis/pull/26) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v1.4.1](https://github.com/nubisproject/nubis-travis/tree/v1.4.1) (2017-09-21)
 [Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.0...v1.4.1)
 
 **Closed issues:**
 
+- Tag v1.4.1 release [\#23](https://github.com/nubisproject/nubis-travis/issues/23)
 - Tag v1.4.1 release [\#20](https://github.com/nubisproject/nubis-travis/issues/20)
 - Tag v1.4.1 release [\#17](https://github.com/nubisproject/nubis-travis/issues/17)
 - Tag v1.4.1 release [\#9](https://github.com/nubisproject/nubis-travis/issues/9)
 
 **Merged pull requests:**
 
+- Merge v1.4.1 release into develop. \[skip ci\] [\#25](https://github.com/nubisproject/nubis-travis/pull/25) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.1 release \[skip ci\] [\#24](https://github.com/nubisproject/nubis-travis/pull/24) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.4.1 release into develop. \[skip ci\] [\#22](https://github.com/nubisproject/nubis-travis/pull/22) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.4.1 release \[skip ci\] [\#21](https://github.com/nubisproject/nubis-travis/pull/21) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.4.1 release into develop. \[skip ci\] [\#19](https://github.com/nubisproject/nubis-travis/pull/19) ([tinnightcap](https://github.com/tinnightcap))
