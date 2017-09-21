@@ -1,7 +1,7 @@
 # Change Log
 
-## [v1.4.1](https://github.com/nubisproject/nubis-travis/tree/v1.4.1) (2017-09-21)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.1...v1.4.1)
+## [v1.4.2](https://github.com/nubisproject/nubis-travis/tree/v1.4.2) (2017-09-21)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.1...v1.4.2)
 
 **Merged pull requests:**
 
