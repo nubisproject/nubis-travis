@@ -3,8 +3,14 @@
 ## [v1.4.1](https://github.com/nubisproject/nubis-travis/tree/v1.4.1) (2017-09-21)
 [Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.0...v1.4.1)
 
+**Closed issues:**
+
+- Tag v1.4.1 release [\#9](https://github.com/nubisproject/nubis-travis/issues/9)
+
 **Merged pull requests:**
 
+- Merge v1.4.1 release into develop. \[skip ci\] [\#16](https://github.com/nubisproject/nubis-travis/pull/16) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.1 release \[skip ci\] [\#15](https://github.com/nubisproject/nubis-travis/pull/15) ([tinnightcap](https://github.com/tinnightcap))
 - Add style file for mdl to use 'ordered' ordered lists [\#8](https://github.com/nubisproject/nubis-travis/pull/8) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.4.0 release into develop. \[skip ci\] [\#7](https://github.com/nubisproject/nubis-travis/pull/7) ([tinnightcap](https://github.com/tinnightcap))
 
