@@ -11,7 +11,7 @@ fi
 
 if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   echo "Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY"
-  exit 1
+  exit 0
 fi
 
 if [ "$BUNDLE_GEMFILE" == "" ]; then
@@ -24,7 +24,7 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/bin/nubis-builder/bin
 
 if [ "$(packer --version 2>/dev/null)" != "$PACKER_VERSION" ]; then
   wget -O /tmp/packer.zip "https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_amd64.zip"
-  ( cd "$HOME/bin" && unzip /tmp/packer.zip )
+  ( cd "$HOME/bin" && unzip -o /tmp/packer.zip )
 fi
 
 if [ ! -d "$HOME/bin/nubis-builder/.git" ]; then
@@ -47,7 +47,6 @@ cat <<EOF > "$HOME/bin/nubis-builder/secrets/variables.json"
 }
 EOF
 
-aws --version
 packer version
 nubis-builder --version
 
