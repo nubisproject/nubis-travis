@@ -1,10 +1,23 @@
 # Change Log
 
+## [v1.5.0](https://github.com/nubisproject/nubis-travis/tree/v1.5.0) (2017-12-08)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.2...v1.5.0)
+
+**Closed issues:**
+
+- Upgrade to newer versions of nubis-builder and packer [\#34](https://github.com/nubisproject/nubis-travis/issues/34)
+
 ## [v1.4.2](https://github.com/nubisproject/nubis-travis/tree/v1.4.2) (2017-09-21)
 [Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.1...v1.4.2)
 
+**Closed issues:**
+
+- Tag v1.4.2 release [\#30](https://github.com/nubisproject/nubis-travis/issues/30)
+
 **Merged pull requests:**
 
+- Merge v1.4.2 release into develop. \[skip ci\] [\#32](https://github.com/nubisproject/nubis-travis/pull/32) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.2 release \[skip ci\] [\#31](https://github.com/nubisproject/nubis-travis/pull/31) ([tinnightcap](https://github.com/tinnightcap))
 - Fix paths for Docker [\#26](https://github.com/nubisproject/nubis-travis/pull/26) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v1.4.1](https://github.com/nubisproject/nubis-travis/tree/v1.4.1) (2017-09-21)
@@ -12,6 +25,7 @@
 
 **Closed issues:**
 
+- Tag v1.4.1 release [\#27](https://github.com/nubisproject/nubis-travis/issues/27)
 - Tag v1.4.1 release [\#23](https://github.com/nubisproject/nubis-travis/issues/23)
 - Tag v1.4.1 release [\#20](https://github.com/nubisproject/nubis-travis/issues/20)
 - Tag v1.4.1 release [\#17](https://github.com/nubisproject/nubis-travis/issues/17)
@@ -31,7 +45,7 @@
 - Merge v1.4.0 release into develop. \[skip ci\] [\#7](https://github.com/nubisproject/nubis-travis/pull/7) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v1.4.0](https://github.com/nubisproject/nubis-travis/tree/v1.4.0) (2017-09-13)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.6...v1.4.0)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.7...v1.4.0)
 
 **Closed issues:**
 
@@ -43,11 +57,11 @@
 - Update CHANGELOG for v1.4.0 release \[skip ci\] [\#6](https://github.com/nubisproject/nubis-travis/pull/6) ([tinnightcap](https://github.com/tinnightcap))
 - Make Markdown checks required [\#4](https://github.com/nubisproject/nubis-travis/pull/4) ([tinnightcap](https://github.com/tinnightcap))
 
-## [v1.3.6](https://github.com/nubisproject/nubis-travis/tree/v1.3.6) (2017-02-14)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.7...v1.3.6)
-
 ## [v1.3.7](https://github.com/nubisproject/nubis-travis/tree/v1.3.7) (2017-02-14)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.5...v1.3.7)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.6...v1.3.7)
+
+## [v1.3.6](https://github.com/nubisproject/nubis-travis/tree/v1.3.6) (2017-02-14)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.5...v1.3.6)
 
 ## [v1.3.5](https://github.com/nubisproject/nubis-travis/tree/v1.3.5) (2017-02-14)
 [Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.4...v1.3.5)
