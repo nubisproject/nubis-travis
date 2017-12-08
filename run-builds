@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-PACKER_VERSION="0.12.2"
-NUBIS_BUILDER_VERSION="v1.3.1"
+PACKER_VERSION="1.1.2"
+NUBIS_BUILDER_VERSION="v1.5.6"
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "AMI building not supported (yet) on Pull-Requests"
