@@ -6,6 +6,12 @@
 **Closed issues:**
 
 - Upgrade to newer versions of nubis-builder and packer [\#34](https://github.com/nubisproject/nubis-travis/issues/34)
+- Tag v1.5.0 release [\#36](https://github.com/nubisproject/nubis-travis/issues/36)
+
+**Merged pull requests:**
+
+- Merge v1.5.0 release into develop. \[skip ci\] [\#38](https://github.com/nubisproject/nubis-travis/pull/38) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.5.0 release \[skip ci\] [\#37](https://github.com/nubisproject/nubis-travis/pull/37) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v1.4.2](https://github.com/nubisproject/nubis-travis/tree/v1.4.2) (2017-09-21)
 [Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.1...v1.4.2)
