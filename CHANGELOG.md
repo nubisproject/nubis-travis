@@ -1,5 +1,24 @@
 # Change Log
 
+## [v2.0.0](https://github.com/nubisproject/nubis-travis/tree/v2.0.0) (2018-02-23)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.5.1...v2.0.0)
+
+**Merged pull requests:**
+
+- Convert all travis checks to use a Docker container [\#42](https://github.com/nubisproject/nubis-travis/pull/42) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v1.5.1](https://github.com/nubisproject/nubis-travis/tree/v1.5.1) (2017-12-08)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.5.0...v1.5.1)
+
+**Closed issues:**
+
+- Tag v1.5.1 release [\#39](https://github.com/nubisproject/nubis-travis/issues/39)
+
+**Merged pull requests:**
+
+- Merge v1.5.1 release into develop. \[skip ci\] [\#41](https://github.com/nubisproject/nubis-travis/pull/41) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.5.1 release \[skip ci\] [\#40](https://github.com/nubisproject/nubis-travis/pull/40) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v1.5.0](https://github.com/nubisproject/nubis-travis/tree/v1.5.0) (2017-12-08)
 [Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.4.2...v1.5.0)
 
