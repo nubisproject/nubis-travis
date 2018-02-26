@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1117
 set -e
 
 PACKER_VERSION="1.1.2"

@@ -1,5 +1,5 @@
 # Docker container for all lint checks for the Nubis project
-# docker run -it -v $(pwd):/nubis/files nubis-travis
+# docker run --mount type=bind,source="$(pwd)",target=/nubis/files nubisproject/nubis-travis:master
 
 FROM alpine:3.6
 MAINTAINER Jason Crowe <jcrowe@mozilla.com>

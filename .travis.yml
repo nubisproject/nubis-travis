@@ -1,0 +1,16 @@
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker pull nubisproject/nubis-travis:master
+
+script:
+  - docker run --mount type=bind,source="$(pwd)",target=/nubis/files nubisproject/nubis-travis:master
+
+notifications:
+  slack:
+    secure: PQMKZ8eLW5WUP9MJ7ZfqjaRwnccLrQ2uDYmtBRIGsaitVnC0nxfMJybx/hiW8ceqc/l0+CihiB8C3BvhwPJ9n2JNmwZSXunu3z/oy+zf5YdgICSGg7R9Tt3ugySf+XeQ1xAjzgJRO19d+me+9pC6VI4U8tLkmDiTRjizkjjCBgRYrj/P3wPLv+10llGhedtE0j10+muOHEeUpHDOZW7nEw5jk1LgVW0PwmHAGp3O4H4er/mP1Oi6W2m5WR4+eRrxxSECr7XfEoNy77YSUPUev53jIVoe0rBovr3aCPxQ2Hw1b6vf+ygzmNh1Y38eI5vWwGbfNMVorxJsTIb5Q9IJPpvqamlz0sfajXpPsb+syYOXrRPt3ZdjGubwgiRprem34Cj7iKXa8VfJu+rrxRie/j9+d+vVt3zPx/XrzU247oN6ybWtiYeWU+EeiXmgDZf1Onva3/WPaXMTlxumT0wwJK0flP0OcSPJPdHlm+J3eZsaMLc6o2aGhXtxDelbo0uWCLb7N2FouNQRJIGAZd9a3V5guFAYxHg7+NGE/F/HsFe1TXNWoPQ/YoYp89aHByx5bToVnw+9pgfbU1jZpz0NSoNU22gMLEFGOI2Z+kFM8/Mk1+UQ6PmLrx1YpdqO4ouaZXC0UoGFxSxFIkk2gfmMIPWLshWQ2DEARLJsDwkdMZw=
