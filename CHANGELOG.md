@@ -1,10 +1,25 @@
 # Change Log
 
-## [v2.0.0](https://github.com/nubisproject/nubis-travis/tree/v2.0.0) (2018-02-23)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.5.1...v2.0.0)
+## [v2.1.0](https://github.com/nubisproject/nubis-travis/tree/v2.1.0) (2018-02-27)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.0.0...v2.1.0)
 
 **Merged pull requests:**
 
+- Dont run ruby-lint against tests [\#48](https://github.com/nubisproject/nubis-travis/pull/48) ([tinnightcap](https://github.com/tinnightcap))
+- Add various checks [\#47](https://github.com/nubisproject/nubis-travis/pull/47) ([tinnightcap](https://github.com/tinnightcap))
+- Adjust comment for new mount style [\#46](https://github.com/nubisproject/nubis-travis/pull/46) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v2.0.0](https://github.com/nubisproject/nubis-travis/tree/v2.0.0) (2018-02-23)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.5.1...v2.0.0)
+
+**Closed issues:**
+
+- Tag v2.0.0 release [\#43](https://github.com/nubisproject/nubis-travis/issues/43)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#45](https://github.com/nubisproject/nubis-travis/pull/45) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#44](https://github.com/nubisproject/nubis-travis/pull/44) ([nubis-automation](https://github.com/nubis-automation))
 - Convert all travis checks to use a Docker container [\#42](https://github.com/nubisproject/nubis-travis/pull/42) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v1.5.1](https://github.com/nubisproject/nubis-travis/tree/v1.5.1) (2017-12-08)
