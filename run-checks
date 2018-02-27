@@ -103,7 +103,8 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
     # ruby-lint ??
     find -not \( \( \
         -path './.git*' \
-        -o -path ./nubis/.tmp \) \
+        -o -path ./nubis/.tmp \
+        -o -path ./tests \) \
         -prune \) \
         -type f \
         -name '*.rb' -print0 \
