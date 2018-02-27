@@ -1,10 +1,23 @@
 # Change Log
 
-## [v2.1.0](https://github.com/nubisproject/nubis-travis/tree/v2.1.0) (2018-02-27)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.0.0...v2.1.0)
+## [v2.2.0](https://github.com/nubisproject/nubis-travis/tree/v2.2.0) (2018-02-27)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.1.0...v2.2.0)
 
 **Merged pull requests:**
 
+- Do not lint JSON template \(.erb\) files [\#52](https://github.com/nubisproject/nubis-travis/pull/52) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v2.1.0](https://github.com/nubisproject/nubis-travis/tree/v2.1.0) (2018-02-27)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.0.0...v2.1.0)
+
+**Closed issues:**
+
+- Tag v2.1.0 release [\#49](https://github.com/nubisproject/nubis-travis/issues/49)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v2.1.0 release \[skip ci\] [\#51](https://github.com/nubisproject/nubis-travis/pull/51) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.1.0 release \[skip ci\] [\#50](https://github.com/nubisproject/nubis-travis/pull/50) ([nubis-automation](https://github.com/nubis-automation))
 - Dont run ruby-lint against tests [\#48](https://github.com/nubisproject/nubis-travis/pull/48) ([tinnightcap](https://github.com/tinnightcap))
 - Add various checks [\#47](https://github.com/nubisproject/nubis-travis/pull/47) ([tinnightcap](https://github.com/tinnightcap))
 - Adjust comment for new mount style [\#46](https://github.com/nubisproject/nubis-travis/pull/46) ([tinnightcap](https://github.com/tinnightcap))
