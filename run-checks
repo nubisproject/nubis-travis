@@ -33,11 +33,12 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
 fi
 
 # JSON Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.json*' -print0)" ]; then
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path '*.erb' \) -prune \) -type f -name '*.json*' -print0)" ]; then
     echo -e "\033[0;32mRunning JSON Lint\033[0m"
     find -not \( \( \
         -path './.git*' \
-        -o -path ./nubis/.tmp \) \
+        -o -path ./nubis/.tmp \
+        -o -path '*.erb' \) \
         -prune \) \
         -type f \
         -name '*.json*' -print0 \
