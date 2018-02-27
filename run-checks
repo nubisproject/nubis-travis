@@ -1,52 +1,116 @@
 #!/bin/bash
+# shellcheck disable=SC1117
+# shellcheck disable=SC2185
 set -e
 
 ERRORS=0
 
+# Puppet Checks
 if [ -d nubis/puppet ]; then
-    echo "Running Puppet Lint"
+    echo -e "\033[0;32mRunning Puppet Lint\033[0m"
     puppet-lint \
         --no-puppet_url_without_modules-check \
         --no-80chars-check \
         --no-140chars-check \
         --fail-on-warnings nubis/puppet/*pp \
-        || echo -e "\033[1;31mWARNING: Puppet linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+        || echo -e "\033[0;31mWARNING: Puppet linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
 fi
 
-echo "Running ShellCheck"
-find -path "./.git*" -prune \
-    -o -path ./nubis/travis -prune \
-    -o -path ./nubis/librarian-puppet -prune \
-    -o -path ./nubis/.tmp -prune \
-    -o -type f -a \! \
-    -name '*.tmpl' -print0 \
-    | xargs -0 file \
-    | grep 'shell script' \
-    | cut -d: -f1 \
-    | xargs -r shellcheck \
-    || ERRORS=$(( ERRORS + 1 ))
+# Bash Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -a \! -name '*.tmpl' -print0)" ]; then
+    echo -e "\033[0;32mRunning ShellCheck\033[0m"
+    find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \) \
+        -prune \) \
+        -type f -a \! \
+        -name '*.tmpl' -print0 \
+        | xargs -0 file \
+        | grep 'shell script' \
+        | cut -d: -f1 \
+        | xargs -r shellcheck \
+        || ERRORS=$(( ERRORS + 1 ))
+fi
 
-echo "Running JSON Lint"
-find  -not \( \( \
-    -path ./nubis/librarian-puppet \
-    -o -path ./nubis/.tmp \
-    -o -path ./nubis/travis \)  \
-    -prune \) \
-    -type f \
-    -name '*.json*' -print0 \
-    | xargs -r0 jsonlint \
-    || ERRORS=$(( ERRORS + 1 ))
+# JSON Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.json*' -print0)" ]; then
+    echo -e "\033[0;32mRunning JSON Lint\033[0m"
+    find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \) \
+        -prune \) \
+        -type f \
+        -name '*.json*' -print0 \
+        | xargs -r0 jsonlint \
+        || ERRORS=$(( ERRORS + 1 ))
+fi
 
-echo "Running MarkDown Lint"
-find  -not \( \( \
-    -path ./nubis/librarian-puppet \
-    -o -path ./nubis/.tmp \
-    -o -path ./nubis/travis \)  \
-    -prune \) \
-    -type f \
-    -name \*.md \
-    | grep -v ./CHANGELOG.md \
-    | xargs -r mdl --style /nubis/style.rb \
-    || ERRORS=$(( ERRORS + 1 ))
+# Markdown Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.md' -print0)" ]; then
+    echo -e "\033[0;32mRunning Markdown Lint\033[0m"
+    find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \) \
+        -prune \) \
+        -type f \
+        -name '*.md' \
+        | grep -v ./CHANGELOG.md \
+        | xargs -r mdl --style /nubis/mdl_style \
+        || ERRORS=$(( ERRORS + 1 ))
+fi
 
+# Terraform Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.tf*' -print0)" ]; then
+    echo -e "\033[0;32mRunning Terraform Checks\033[0m"
+    DIRECTORIES="$(find -not \( \( -path './.git*' \) -prune \) -type f -name '*.tf*' -print0 | xargs -0 -n1 dirname | sort -u)"
+    for DIRECTORY in $DIRECTORIES; do
+        terraform validate -check-variables=false "${DIRECTORY}" \
+        || echo -e "\033[0;31mWARNING: Terraform validate will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+        terraform fmt -check=true -diff=true "${DIRECTORY}" \
+        || echo -e "\033[0;31mWARNING: Terraform formatting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+    done
+fi
+
+# Travis Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name .travis.yml -print0)" ]; then
+    echo -e "\033[0;32mRunning Travis Lint\033[0m"
+    find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \) \
+        -prune \) \
+        -type f \
+        -name .travis.yml -print0 \
+        | xargs -r0 travis lint \
+        || ERRORS=$(( ERRORS + 1 ))
+fi
+
+# Dockerfile Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name Dockerfile -print0)" ]; then
+    echo -e "\033[0;32mRunning Dockerfile Lint\033[0m"
+    find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \) \
+        -prune \) \
+        -type f \
+        -name Dockerfile -print0 \
+        | xargs -r0 /nubis/bin/dockerfilelint/bin/dockerfilelint \
+        || ERRORS=$(( ERRORS + 1 ))
+fi
+
+# Ruby Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.rb' -print0)" ]; then
+    echo -e "\033[0;32mRunning Ruby Lint\033[0m"
+    # ruby-lint ??
+    find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \
+        -o -path ./tests \) \
+        -prune \) \
+        -type f \
+        -name '*.rb' -print0 \
+        | xargs -r0 ruby-lint \
+        || echo -e "\033[0;31mWARNING: Ruby linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+fi
+
+# Exit with status of all checks combined
 exit $ERRORS
