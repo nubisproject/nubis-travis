@@ -17,14 +17,9 @@ if [ -d nubis/puppet ]; then
 fi
 
 # Bash Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -a \! -name '*.tmpl' -print0)" ]; then
+if git grep -z -P -l '^#!' | xargs -0 -r file 2>/dev/null | grep -q 'shell script' ; then
     echo -e "\033[0;32mRunning ShellCheck\033[0m"
-    find -not \( \( \
-        -path './.git*' \
-        -o -path ./nubis/.tmp \) \
-        -prune \) \
-        -type f -a \! \
-        -name '*.tmpl' -print0 \
+    git grep -z -P -l '^#!' \
         | xargs -0 file \
         | grep 'shell script' \
         | cut -d: -f1 \
@@ -33,37 +28,29 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
 fi
 
 # JSON Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path '*.erb' \) -prune \) -type f -name '*.json*' -print0)" ]; then
+if git ls-files | grep -v '\.erb' | grep -q '\.json' ; then
     echo -e "\033[0;32mRunning JSON Lint\033[0m"
-    find -not \( \( \
-        -path './.git*' \
-        -o -path ./nubis/.tmp \
-        -o -path '*.erb' \) \
-        -prune \) \
-        -type f \
-        -name '*.json*' -print0 \
-        | xargs -r0 jsonlint \
+    git ls-files \
+        | grep '\.json' \
+	| grep -v '\.erb' \
+        | xargs -r jsonlint \
         || ERRORS=$(( ERRORS + 1 ))
 fi
 
 # Markdown Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.md' -print0)" ]; then
+if git ls-files | grep -v CHANGELOG.md | grep -q '\.md$' ; then
     echo -e "\033[0;32mRunning Markdown Lint\033[0m"
-    find -not \( \( \
-        -path './.git*' \
-        -o -path ./nubis/.tmp \) \
-        -prune \) \
-        -type f \
-        -name '*.md' \
-        | grep -v ./CHANGELOG.md \
+    git ls-files \
+        | grep '\.md$' \
+        | grep -v CHANGELOG.md \
         | xargs -r mdl --style /nubis/mdl_style \
         || ERRORS=$(( ERRORS + 1 ))
 fi
 
 # Terraform Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.tf*' -print0)" ]; then
+if git ls-files | grep -q '\.tf$' ; then
     echo -e "\033[0;32mRunning Terraform Checks\033[0m"
-    DIRECTORIES="$(find -not \( \( -path './.git*' \) -prune \) -type f -name '*.tf*' -print0 | xargs -0 -n1 dirname | sort -u)"
+    DIRECTORIES="$(git ls-files | grep '\.tf$' | xargs -r -n1 dirname | sort -u)"
     for DIRECTORY in $DIRECTORIES; do
         terraform validate -check-variables=false "${DIRECTORY}" \
         || echo -e "\033[0;31mWARNING: Terraform validate will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
@@ -73,43 +60,29 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
 fi
 
 # Travis Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name .travis.yml -print0)" ]; then
+if git ls-files | grep -qE '(^|/).travis.yml$'; then
     echo -e "\033[0;32mRunning Travis Lint\033[0m"
-    find -not \( \( \
-        -path './.git*' \
-        -o -path ./nubis/.tmp \) \
-        -prune \) \
-        -type f \
-        -name .travis.yml -print0 \
-        | xargs -r0 travis lint \
+    git ls-files \
+        | grep -E '(^|/).travis.yml$' \
+        | xargs -r travis lint \
         || ERRORS=$(( ERRORS + 1 ))
 fi
 
 # Dockerfile Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name Dockerfile -print0)" ]; then
+if git ls-files | grep -qE '(^|/)Dockerfile$'; then
     echo -e "\033[0;32mRunning Dockerfile Lint\033[0m"
-    find -not \( \( \
-        -path './.git*' \
-        -o -path ./nubis/.tmp \) \
-        -prune \) \
-        -type f \
-        -name Dockerfile -print0 \
-        | xargs -r0 /nubis/bin/dockerfilelint/bin/dockerfilelint \
+    git ls-files \
+        | grep -E '(^|/)Dockerfile$' \
+        | xargs -r /nubis/bin/dockerfilelint/bin/dockerfilelint \
         || ERRORS=$(( ERRORS + 1 ))
 fi
 
 # Ruby Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.rb' -print0)" ]; then
+if git ls-files | grep -q '\.rb$' ; then
     echo -e "\033[0;32mRunning Ruby Lint\033[0m"
-    # ruby-lint ??
-    find -not \( \( \
-        -path './.git*' \
-        -o -path ./nubis/.tmp \
-        -o -path ./tests \) \
-        -prune \) \
-        -type f \
-        -name '*.rb' -print0 \
-        | xargs -r0 ruby-lint \
+    git ls-files \
+        | grep '\.rb$' \
+        | xargs -r ruby-lint \
         || echo -e "\033[0;31mWARNING: Ruby linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
 fi
 
