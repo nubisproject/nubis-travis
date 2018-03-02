@@ -1,10 +1,30 @@
 # Change Log
 
-## [v2.2.0](https://github.com/nubisproject/nubis-travis/tree/v2.2.0) (2018-02-27)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.1.0...v2.2.0)
+## [v2.3.0](https://github.com/nubisproject/nubis-travis/tree/v2.3.0) (2018-03-02)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.2.0...v2.3.0)
+
+**Closed issues:**
+
+- Run puppet validate [\#57](https://github.com/nubisproject/nubis-travis/issues/57)
 
 **Merged pull requests:**
 
+- Enforce tests [\#62](https://github.com/nubisproject/nubis-travis/pull/62) ([tinnightcap](https://github.com/tinnightcap))
+- Install puppet and run puppet parser validate on puppet files [\#61](https://github.com/nubisproject/nubis-travis/pull/61) ([gozer](https://github.com/gozer))
+- Revert "Install puppet and run puppet parser validate on puppet files" [\#60](https://github.com/nubisproject/nubis-travis/pull/60) ([tinnightcap](https://github.com/tinnightcap))
+- Install puppet and run puppet parser validate on puppet files [\#58](https://github.com/nubisproject/nubis-travis/pull/58) ([gozer](https://github.com/gozer))
+
+## [v2.2.0](https://github.com/nubisproject/nubis-travis/tree/v2.2.0) (2018-02-27)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.1.0...v2.2.0)
+
+**Closed issues:**
+
+- Tag v2.2.0 release [\#53](https://github.com/nubisproject/nubis-travis/issues/53)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#55](https://github.com/nubisproject/nubis-travis/pull/55) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#54](https://github.com/nubisproject/nubis-travis/pull/54) ([nubis-automation](https://github.com/nubis-automation))
 - Do not lint JSON template \(.erb\) files [\#52](https://github.com/nubisproject/nubis-travis/pull/52) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v2.1.0](https://github.com/nubisproject/nubis-travis/tree/v2.1.0) (2018-02-27)
