@@ -7,13 +7,18 @@ ERRORS=0
 
 # Puppet Checks
 if [ -d nubis/puppet ]; then
+    echo -e "\033[0;32mRunning Puppet Validate\033[0m"
+    puppet parser validate \
+        nubis/puppet/*pp \
+        || ERRORS=$(( ERRORS + 1 ))
+
     echo -e "\033[0;32mRunning Puppet Lint\033[0m"
     puppet-lint \
         --no-puppet_url_without_modules-check \
         --no-80chars-check \
         --no-140chars-check \
         --fail-on-warnings nubis/puppet/*pp \
-        || echo -e "\033[0;31mWARNING: Puppet linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+        || ERRORS=$(( ERRORS + 1 ))
 fi
 
 # Bash Checks
@@ -66,9 +71,9 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
     DIRECTORIES="$(find -not \( \( -path './.git*' \) -prune \) -type f -name '*.tf*' -print0 | xargs -0 -n1 dirname | sort -u)"
     for DIRECTORY in $DIRECTORIES; do
         terraform validate -check-variables=false "${DIRECTORY}" \
-        || echo -e "\033[0;31mWARNING: Terraform validate will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+        || ERRORS=$(( ERRORS + 1 ))
         terraform fmt -check=true -diff=true "${DIRECTORY}" \
-        || echo -e "\033[0;31mWARNING: Terraform formatting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+        || ERRORS=$(( ERRORS + 1 ))
     done
 fi
 
