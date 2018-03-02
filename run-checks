@@ -7,6 +7,11 @@ ERRORS=0
 
 # Puppet Checks
 if [ -d nubis/puppet ]; then
+    echo -e "\033[0;32mRunning Puppet Validate\033[0m"
+    puppet parser validate \
+        nubis/puppet/*pp \
+        || ERRORS=$(( ERRORS + 1 ))
+
     echo -e "\033[0;32mRunning Puppet Lint\033[0m"
     puppet-lint \
         --no-puppet_url_without_modules-check \
