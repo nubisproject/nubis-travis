@@ -6,7 +6,6 @@ LABEL maintainer="Jason Crowe <jcrowe@mozilla.com>"
 
 ENV DockerfilelintVersion=1.4.0 \
     RubyLintVersion=2.0.4 \
-    PuppetVersion=4.10.9 \
     TerraformVersion=0.10.8
 
 # Install runtime dependencies
@@ -30,10 +29,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
 # puppet-lint requires ruby ruby-irb
 # jsonlint requires ruby ruby-irb ruby-dev build-base
 # mdl requires ruby ruby-irb
-# puppet requires ruby ruby-irb
-
 RUN gem install puppet-lint --no-document \
-    && gem install puppet -v ${PuppetVersion} --no-document \
     && gem install jsonlint --no-document \
     && gem install mdl --no-document \
     && gem install travis --no-document \
