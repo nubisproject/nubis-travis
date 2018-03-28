@@ -25,6 +25,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
     curl \
     ruby-dev \
     unzip \
+    py-pip \
     && rm -f /var/cache/apk/APKINDEX.*
 
 # puppet-lint requires ruby ruby-irb
@@ -58,7 +59,8 @@ RUN gem install puppet-lint --no-document \
             dockerfilelint-${DockerfilelintVersion}/package.json \
     && mv dockerfilelint-${DockerfilelintVersion} /nubis/bin/dockerfilelint \
     && rm dockerfilelint-${DockerfilelintVersion}.tar.gz \
-    && cd /nubis/bin/dockerfilelint && yarn
+    && cd /nubis/bin/dockerfilelint && yarn \
+    && pip install pylint
 
 
 # Remove build dependencies

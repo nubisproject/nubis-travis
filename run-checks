@@ -118,5 +118,21 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
         || echo -e "\033[0;31mWARNING: Ruby linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
 fi
 
+# Python Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -a \! -name '*.tmpl' -print0)" ]; then
+    echo -e "\033[0;32mRunning Python Lint\033[0m"
+    find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \) \
+        -prune \) \
+        -type f -a \! \
+        -name '*.tmpl' -print0 \
+        | xargs -0 file \
+        | grep 'Python script' \
+        | cut -d: -f1 \
+        | xargs -r pylint -j 0 \
+        || echo -e "\033[0;31mWARNING: Python linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+fi
+
 # Exit with status of all checks combined
 exit $ERRORS
