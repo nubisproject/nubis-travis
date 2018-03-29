@@ -16,7 +16,9 @@ RUN apk add --no-cache \
     file \
     nodejs-npm \
     ruby \
-    ruby-irb
+    ruby-irb \
+    python \
+    py-setuptools
 
 # Install build dependencies
 #+ Cleanup apk cache files
