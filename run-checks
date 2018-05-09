@@ -22,11 +22,12 @@ if [ -d nubis/puppet ]; then
 fi
 
 # Bash Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -a \! -name '*.tmpl' -print0)" ]; then
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -a \! -name '*.tmpl' -print0)" ]; then
     echo -e "\033[0;32mRunning ShellCheck\033[0m"
     find -not \( \( \
         -path './.git*' \
-        -o -path ./nubis/.tmp \) \
+        -o -path ./nubis/.tmp \
+        -o -path ./vendor \) \
         -prune \) \
         -type f -a \! \
         -name '*.tmpl' -print0 \
@@ -38,11 +39,12 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
 fi
 
 # JSON Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path '*.erb' \) -prune \) -type f -name '*.json*' -print0)" ]; then
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor -o -path '*.erb' \) -prune \) -type f -name '*.json*' -print0)" ]; then
     echo -e "\033[0;32mRunning JSON Lint\033[0m"
     find -not \( \( \
         -path './.git*' \
         -o -path ./nubis/.tmp \
+        -o -path ./vendor \
         -o -path '*.erb' \) \
         -prune \) \
         -type f \
@@ -52,11 +54,12 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path '*.e
 fi
 
 # Markdown Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.md' -print0)" ]; then
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -name '*.md' -print0)" ]; then
     echo -e "\033[0;32mRunning Markdown Lint\033[0m"
     find -not \( \( \
         -path './.git*' \
-        -o -path ./nubis/.tmp \) \
+        -o -path ./nubis/.tmp \
+        -o -path ./vendor \) \
         -prune \) \
         -type f \
         -name '*.md' \
@@ -66,9 +69,9 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
 fi
 
 # Terraform Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.tf*' -print0)" ]; then
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -name '*.tf*' -print0)" ]; then
     echo -e "\033[0;32mRunning Terraform Checks\033[0m"
-    DIRECTORIES="$(find -not \( \( -path './.git*' \) -prune \) -type f -name '*.tf*' -print0 | xargs -0 -n1 dirname | sort -u)"
+    DIRECTORIES="$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -name '*.tf*' -print0 | xargs -0 -n1 dirname | sort -u)"
     for DIRECTORY in $DIRECTORIES; do
         terraform validate -check-variables=false "${DIRECTORY}" \
         || ERRORS=$(( ERRORS + 1 ))
@@ -78,24 +81,19 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
 fi
 
 # Travis Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name .travis.yml -print0)" ]; then
+if [ -f '.travis.yml' ]; then
     echo -e "\033[0;32mRunning Travis Lint\033[0m"
-    find -not \( \( \
-        -path './.git*' \
-        -o -path ./nubis/.tmp \) \
-        -prune \) \
-        -type f \
-        -name .travis.yml -print0 \
-        | xargs -r0 travis lint \
+    travis lint '.travis.yml' \
         || ERRORS=$(( ERRORS + 1 ))
 fi
 
 # Dockerfile Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name Dockerfile -print0)" ]; then
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -name Dockerfile -print0)" ]; then
     echo -e "\033[0;32mRunning Dockerfile Lint\033[0m"
     find -not \( \( \
         -path './.git*' \
-        -o -path ./nubis/.tmp \) \
+        -o -path ./nubis/.tmp \
+        -o -path ./vendor \) \
         -prune \) \
         -type f \
         -name Dockerfile -print0 \
@@ -104,12 +102,13 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
 fi
 
 # Ruby Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -name '*.rb' -print0)" ]; then
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -name '*.rb' -print0)" ]; then
     echo -e "\033[0;32mRunning Ruby Lint\033[0m"
     # ruby-lint ??
     find -not \( \( \
         -path './.git*' \
         -o -path ./nubis/.tmp \
+        -o -path ./vendor \
         -o -path ./tests \) \
         -prune \) \
         -type f \
@@ -118,5 +117,45 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) 
         || echo -e "\033[0;31mWARNING: Ruby linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
 fi
 
+# Python Checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -a \! -name '*.tmpl' -print0)" ]; then
+    echo -e "\033[0;32mRunning Python Lint\033[0m"
+    find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \
+        -o -path ./vendor \) \
+        -prune \) \
+        -type f -a \! \
+        -name '*.tmpl' -print0 \
+        | xargs -0 file \
+        | grep 'Python script' \
+        | cut -d: -f1 \
+        | xargs -r pylint -j 0 \
+        || echo -e "\033[0;31mWARNING: Python linting will be enforced soon. Please fix these issues.\033[0m" #ERRORS=$(( ERRORS + 1 ))
+fi
+
+# go checks
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -name '*.go' -print0)" ]; then
+    echo -e "\033[0;32mRunning gofmt\033[0m"
+    FILES=$(find -not \( \( \
+        -path './.git*' \
+        -o -path ./nubis/.tmp \
+        -o -path ./vendor \
+        -o -path ./tests \) \
+        -prune \) \
+        -type f \
+        -name '*.go' -print)
+
+        for f in ${FILES}; do
+            if [ "$(gofmt -l "${f}")" != "" ]; then
+                echo "FILE '$f' has issues"
+                ERRORS=$(( ERRORS + 1 ))
+            else
+                echo "FILE '$f' OK"
+            fi
+        done
+fi
+
 # Exit with status of all checks combined
-exit $ERRORS
+echo "Found ${ERRORS} issues."
+exit "${ERRORS}"
