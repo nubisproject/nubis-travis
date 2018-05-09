@@ -14,6 +14,7 @@ RUN apk add --no-cache \
     bash \
     findutils \
     file \
+    go \
     nodejs-npm \
     ruby \
     ruby-irb \
