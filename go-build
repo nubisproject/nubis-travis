@@ -3,9 +3,6 @@
 # Script to test building go applications
 #
 
-# Make sure we capture failures from pipe commands
-set -o pipefail
-
 NUBIS_VOLUME='/nubis/files'
 export GOPATH='/nubis/go'
 BUILD_PATH="${GOPATH}/src/build"
