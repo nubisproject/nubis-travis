@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.5.0](https://github.com/nubisproject/nubis-travis/tree/v2.5.0) (2018-05-09)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.4.0...v2.5.0)
+
+**Merged pull requests:**
+
+- Add go-build support [\#73](https://github.com/nubisproject/nubis-travis/pull/73) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v2.4.0](https://github.com/nubisproject/nubis-travis/tree/v2.4.0) (2018-05-09)
 [Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.3.0...v2.4.0)
 
@@ -7,9 +14,12 @@
 
 - Add support for Python Linting [\#66](https://github.com/nubisproject/nubis-travis/issues/66)
 - Use git instead of find [\#56](https://github.com/nubisproject/nubis-travis/issues/56)
+- Tag v2.4.0 release [\#69](https://github.com/nubisproject/nubis-travis/issues/69)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.4.0 release \[skip ci\] [\#71](https://github.com/nubisproject/nubis-travis/pull/71) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.4.0 release \[skip ci\] [\#70](https://github.com/nubisproject/nubis-travis/pull/70) ([nubis-automation](https://github.com/nubis-automation))
 - Add git format check [\#68](https://github.com/nubisproject/nubis-travis/pull/68) ([tinnightcap](https://github.com/tinnightcap))
 - Add pylint [\#67](https://github.com/nubisproject/nubis-travis/pull/67) ([gozer](https://github.com/gozer))
 

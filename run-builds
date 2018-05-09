@@ -2,6 +2,12 @@
 # shellcheck disable=SC1117
 set -e
 
+# Make sure we capture failures from pipe commands
+set -o pipefail
+
+echo "run-builds has not yet been updated to work in Docker"
+exit 1
+
 PACKER_VERSION="1.1.2"
 NUBIS_BUILDER_VERSION="v1.5.6"
 
