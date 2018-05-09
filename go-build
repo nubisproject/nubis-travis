@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Script to test building go applications
+#
+
+# Make sure we capture failures from pipe commands
+set -o pipefail
+
+NUBIS_VOLUME='/nubis/files'
+export GOPATH='/nubis/go'
+BUILD_PATH="${GOPATH}/src/build"
+ERRORS=0
+
+setup-go-dirs() {
+    mkdir -p "${GOPATH}" "${GOPATH}/src" "${GOPATH}/bin" "${GOPATH}/pkg" "${BUILD_PATH}" || ERRORS=$(( ERRORS + 1 ))
+}
+
+setup-build-dir() {
+    # Skip any downloaded terraform submodules.
+    #+ Terraform modules contain symlinks with full paths that are not valid in
+    #+ the container.
+    RSYNC=( 'rsync' '-auz' )
+    RSYNC_EXCLUDES=( '--exclude=SEC,*.pid' )
+    RSYNC_EXCLUDES+=( '--exclude=.terraform' )
+    RSYNC_EXCLUDES+=( '--exclude=.git*' )
+    RSYNC_EXCLUDES+=( '--exclude=.travis.yml' )
+    RSYNC_EXCLUDES+=( '--exclude=terraform.tfstate*' )
+    "${RSYNC[@]}" "${RSYNC_EXCLUDES[@]}" -x "${NUBIS_VOLUME}/" "${BUILD_PATH}/" || ERRORS=$(( ERRORS + 1 ))
+}
+
+setup-go-dirs
+setup-build-dir
+
+cd "${BUILD_PATH}" || ERRORS=$(( ERRORS + 1 ))
+
+echo "Running: 'dep ensure -v'"
+dep ensure -v || ERRORS=$(( ERRORS + 1 ))
+
+echo "Running: 'make all'"
+make all || ERRORS=$(( ERRORS + 1 ))
+
+# Exit with status of all checks combined
+echo "Found ${ERRORS} issues."
+exit "${ERRORS}"
