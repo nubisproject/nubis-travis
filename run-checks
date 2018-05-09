@@ -118,11 +118,12 @@ if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./ve
 fi
 
 # Python Checks
-if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp \) -prune \) -type f -a \! -name '*.tmpl' -print0)" ]; then
+if [ ! -z "$(find -not \( \( -path './.git*' -o -path ./nubis/.tmp -o -path ./vendor \) -prune \) -type f -a \! -name '*.tmpl' -print0)" ]; then
     echo -e "\033[0;32mRunning Python Lint\033[0m"
     find -not \( \( \
         -path './.git*' \
-        -o -path ./nubis/.tmp \) \
+        -o -path ./nubis/.tmp \
+        -o -path ./vendor \) \
         -prune \) \
         -type f -a \! \
         -name '*.tmpl' -print0 \
