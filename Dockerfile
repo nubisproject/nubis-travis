@@ -4,18 +4,22 @@
 FROM alpine:3.6
 LABEL maintainer="Jason Crowe <jcrowe@mozilla.com>"
 
-ENV DockerfilelintVersion=1.4.0 \
-    RubyLintVersion=2.0.4 \
+ENV DepVersion=0.4.1 \
+    DockerfilelintVersion=1.4.0 \
     PuppetVersion=4.10.9 \
+    RubyLintVersion=2.0.4 \
     TerraformVersion=0.10.8
 
 # Install runtime dependencies
 RUN apk add --no-cache \
     bash \
+    build-base \
     findutils \
     file \
+    git \
     go \
     nodejs-npm \
+    rsync \
     ruby \
     ruby-irb \
     python \
@@ -24,7 +28,6 @@ RUN apk add --no-cache \
 # Install build dependencies
 #+ Cleanup apk cache files
 RUN apk add --no-cache --virtual .build-dependencies \
-    build-base \
     curl \
     ruby-dev \
     unzip \
@@ -63,14 +66,20 @@ RUN gem install puppet-lint --no-document \
     && mv dockerfilelint-${DockerfilelintVersion} /nubis/bin/dockerfilelint \
     && rm dockerfilelint-${DockerfilelintVersion}.tar.gz \
     && cd /nubis/bin/dockerfilelint && yarn \
-    && pip install pylint
-
+    && pip install pylint \
+    && curl -L -o dep https://github.com/golang/dep/releases/download/v${DepVersion}/dep-linux-amd64 \
+    && chmod +x dep \
+    && mv dep /nubis/bin/
 
 # Remove build dependencies
 RUN apk del .build-dependencies
 
+COPY [ "main.sh", "/nubis/bin/" ]
 COPY [ "run-checks", "/nubis/bin/" ]
+COPY [ "run-builds", "/nubis/bin/" ]
+COPY [ "go-build", "/nubis/bin/" ]
 COPY [ "mdl_style", "/nubis/" ]
 WORKDIR /nubis/files
 ENV PATH /nubis/bin:$PATH
-ENTRYPOINT [ "run-checks" ]
+ENTRYPOINT [ "main.sh" ]
+CMD [ "lint" ]
