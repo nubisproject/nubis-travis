@@ -4,8 +4,7 @@
 # This is an options script used to invoke various other tools or scripts
 #
 
-# Make sure we capture failures from pipe commands
-set -o pipefail
+ERRORS=0
 
 show-help () {
     echo -en "Usage: $0 [options] command\n\n"
@@ -30,12 +29,15 @@ while [ "$1" != "" ]; do
         ;;
         go-build )
             go-build
+            ERRORS=$(( ERRORS + $? ))
         ;;
         run-checks | lint )
             run-checks
+            ERRORS=$(( ERRORS + $? ))
         ;;
         run-builds )
             run-builds
+            ERRORS=$(( ERRORS + $? ))
         ;;
         * )
             show-help
@@ -43,3 +45,5 @@ while [ "$1" != "" ]; do
     esac
     shift
 done
+
+exit "${ERRORS}"

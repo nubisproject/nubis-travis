@@ -1,10 +1,23 @@
 # Change Log
 
-## [v2.5.0](https://github.com/nubisproject/nubis-travis/tree/v2.5.0) (2018-05-09)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.4.0...v2.5.0)
+## [v2.6.0](https://github.com/nubisproject/nubis-travis/tree/v2.6.0) (2018-05-10)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.5.0...v2.6.0)
 
 **Merged pull requests:**
 
+- Fix error handeling [\#77](https://github.com/nubisproject/nubis-travis/pull/77) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v2.5.0](https://github.com/nubisproject/nubis-travis/tree/v2.5.0) (2018-05-09)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v2.4.0...v2.5.0)
+
+**Closed issues:**
+
+- Tag v2.5.0 release [\#74](https://github.com/nubisproject/nubis-travis/issues/74)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v2.5.0 release \[skip ci\] [\#76](https://github.com/nubisproject/nubis-travis/pull/76) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.5.0 release \[skip ci\] [\#75](https://github.com/nubisproject/nubis-travis/pull/75) ([nubis-automation](https://github.com/nubis-automation))
 - Add go-build support [\#73](https://github.com/nubisproject/nubis-travis/pull/73) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v2.4.0](https://github.com/nubisproject/nubis-travis/tree/v2.4.0) (2018-05-09)
@@ -59,6 +72,7 @@
 **Closed issues:**
 
 - Tag v2.1.0 release [\#49](https://github.com/nubisproject/nubis-travis/issues/49)
+- Exclude .git directories from searches [\#33](https://github.com/nubisproject/nubis-travis/issues/33)
 
 **Merged pull requests:**
 
@@ -144,7 +158,7 @@
 - Merge v1.4.0 release into develop. \[skip ci\] [\#7](https://github.com/nubisproject/nubis-travis/pull/7) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v1.4.0](https://github.com/nubisproject/nubis-travis/tree/v1.4.0) (2017-09-13)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.6...v1.4.0)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.7...v1.4.0)
 
 **Closed issues:**
 
@@ -156,11 +170,11 @@
 - Update CHANGELOG for v1.4.0 release \[skip ci\] [\#6](https://github.com/nubisproject/nubis-travis/pull/6) ([tinnightcap](https://github.com/tinnightcap))
 - Make Markdown checks required [\#4](https://github.com/nubisproject/nubis-travis/pull/4) ([tinnightcap](https://github.com/tinnightcap))
 
-## [v1.3.6](https://github.com/nubisproject/nubis-travis/tree/v1.3.6) (2017-02-14)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.7...v1.3.6)
-
 ## [v1.3.7](https://github.com/nubisproject/nubis-travis/tree/v1.3.7) (2017-02-14)
-[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.5...v1.3.7)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.6...v1.3.7)
+
+## [v1.3.6](https://github.com/nubisproject/nubis-travis/tree/v1.3.6) (2017-02-14)
+[Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.5...v1.3.6)
 
 ## [v1.3.5](https://github.com/nubisproject/nubis-travis/tree/v1.3.5) (2017-02-14)
 [Full Changelog](https://github.com/nubisproject/nubis-travis/compare/v1.3.4...v1.3.5)
