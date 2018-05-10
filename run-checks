@@ -3,9 +3,6 @@
 # shellcheck disable=SC2185
 set -e
 
-# Make sure we capture failures from pipe commands
-set -o pipefail
-
 ERRORS=0
 
 # Puppet Checks
